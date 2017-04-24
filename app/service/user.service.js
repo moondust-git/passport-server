@@ -2,8 +2,8 @@
  * Created by Tristan on 17/3/27.
  */
 
-const userModel = require('../model/user')
-const BusinessError = require("../../error").BusinessError;
+const userModel = require('../model/user.module')
+const BusinessError = require("moondust-error").BusinessError;
 //验证用户名和密码，并返回对象
 async function validate(username, password) {
     let user = await userModel.findByUsername(username);

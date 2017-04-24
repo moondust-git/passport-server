@@ -3,8 +3,8 @@
  */
 
 const codeUtils = require('../utils').codeUtil
-const Errors = require('../../error');
-const clientModel = require('../model/client')
+const Errors = require('moondust-error');
+const clientModel = require('../model/client.module');
 const commonUtil = require('../utils');
 
 /**
@@ -14,7 +14,7 @@ const commonUtil = require('../utils');
  * @returns {Promise}
  */
 async function register(client_name, redirect_uri) {
-    console.log('client_service-register')
+    console.log('client_service-register');
     let data = {
         client_name: client_name,
         client_id: codeUtils.client_id_builder(),
@@ -23,7 +23,7 @@ async function register(client_name, redirect_uri) {
         create_time: new Date(),
         scope: 'read',
         redirect_uri: redirect_uri
-    }
+    };
     return await clientModel.insertClient(data);
 }
 

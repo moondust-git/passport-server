@@ -4,7 +4,7 @@
 
 const Router = require('koa-router');
 const userService = require('../service/user.service');
-const ParamError = require('../../error').ParamError;
+const ParamError = require('moondust-error').ParamError;
 const commonUtil = require('../utils');
 let router = new Router().prefix('/api/');
 router.post('/register.md', async (ctx) => {

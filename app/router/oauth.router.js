@@ -3,7 +3,7 @@
  */
 const Router = require('koa-router');
 const utils = require('../utils');
-const ParamError = require('../../error').ParamError;
+const ParamError = require('moondust-error').ParamError;
 const clientService = require('../service/client.service');
 const oauthService = require('../service/oauth.service');
 

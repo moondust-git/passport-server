@@ -22,6 +22,8 @@
     "koa-router": "^7.0.1",
     "koa2-cors": "^2.0.3",
     "mongoose": "^4.9.2",
+    "moondust-error": "^1.0.1",
+    "moondust-error-handler": "^1.0.0",
     "moondust-koa2-route-loader": "^1.0.4",
     "moondust-util": "^1.1.0",
     "redis": "^2.7.1",

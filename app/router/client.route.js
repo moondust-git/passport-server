@@ -3,8 +3,8 @@
  */
 const Router = require('koa-router')
 const ClientService = require('../service/client.service')
-const ParamError = require('../../error').ParamError;
-const commonUtil = require('../utils')
+const ParamError = require('moondust-error').ParamError;
+const commonUtil = require('../utils');
 const route = new Router().prefix('/api/client');
 route.post('/register.md', async (ctx) => {
     let client_name = ctx.request.body.client_name;

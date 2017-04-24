@@ -1,11 +1,11 @@
 /**
  * Created by Tristan on 17/3/27.
  */
-const userModel = require('../model/user');
+const userModel = require('../model/user.module');
 const util = require('util');
 const commonUtil = require('../utils/index');
-const clientModel = require('../model/client');
-const BusinessError = require('../../error').BusinessError;
+const clientModel = require('../model/client.module');
+const BusinessError = require('moondust-error').BusinessError;
 const authCode_repository = require('../repository/authcode_repository');
 const token_repository = require('../repository/token_repository');
 /**

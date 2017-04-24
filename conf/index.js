@@ -1,7 +1,9 @@
 /**
  * Created by Tristan on 17/3/19.
  */
-module.exports.port = 3000
+module.exports.appInfo = {
+    port: 3000
+};
 
 module.exports.mongoose = {
     url: 'mongodb://moondust.cn/auth',

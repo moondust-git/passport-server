@@ -2,34 +2,26 @@
  * Created by Tristan on 2017/3/29.
  */
 const Koa = require('koa');
-const app = new Koa();
+const server = new Koa();
 const path = require('path');
-const bodyparser = require('koa-bodyparser');
+const parser = require('koa-bodyparser');
 const Logger = require('koa-logger');
 const convert = require('koa-convert');
-const cors = require('koa2-cors');
-const routerLoader=require('moondust-koa2-route-loader');
+const cross = require('koa2-cors');
+const routerLoader = require('moondust-koa2-route-loader');
+const NotFound = require("moondust-error").NotFound;
+const handler = require('moondust-error-handler');
 
 
 //-------midleware
-app.use(bodyparser());
-app.use(Logger());
-app.use(cors());
+server.use(parser());
+server.use(Logger());
+server.use(cross());
+server.use(handler());
 
+routerLoader(server, path.join(__dirname, 'app/router'));
 
-app.use(async (ctx, next) => {
-    try {
-        await next()
-    } catch (e) {
-        console.error(e.message);
-        console.error(e.stack);
-        ctx.status = 500;
-        ctx.body = {status: e.code || 500, message: e.message, name: e.name}
-    }
+server.use(async (ctx) => {
+    ctx.throw(new NotFound(404, 'notfound'))
 });
-routerLoader(app,path.join(__dirname,'app/router'));
-
-app.use(async (ctx) => {
-    await  ctx.render('index')
-});
-module.exports = app;
+module.exports = server;
