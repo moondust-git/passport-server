@@ -19,9 +19,10 @@ server.use(Logger());
 server.use(cross());
 server.use(handler());
 
-routerLoader(server, path.join(__dirname, 'app/router'));
-
-server.use(async (ctx) => {
-    ctx.throw(new NotFound(404, 'notfound'))
-});
+routerLoader(server, path.join(__dirname, 'app/router')).then(() => {
+        server.use(async (ctx) => {
+            ctx.throw(new NotFound(404, 'notfound'))
+        });
+    }
+);
 module.exports = server;
