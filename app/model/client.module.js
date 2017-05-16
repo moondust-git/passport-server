@@ -45,7 +45,6 @@ clientSchema.statics.insertClient = async (client) => {
     })
 };
 
-
 const Client = mongo.model('client_table', clientSchema);
 module.exports = Client;
 

@@ -8,7 +8,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="node-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="koa-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="node-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="node-7z-DefinitelyTyped" level="application" />
   </component>
 </module>

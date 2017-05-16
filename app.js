@@ -25,4 +25,5 @@ routerLoader(server, path.join(__dirname, 'app/router')).then(() => {
         });
     }
 );
+
 module.exports = server;
