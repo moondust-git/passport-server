@@ -2,11 +2,10 @@
  * Created by Tristan on 17/3/29.
  */
 const Router = require('koa-router');
-const stringUtil = require('moondust-util').stringUtil;
+const mdUtil = require('moondust-util');
 const ParamError = require('moondust-error').ParamError;
 const clientService = require('../service/client.service');
 const oauthService = require('../service/oauth.service');
-
 
 const router = new Router().prefix('/api/oauth');
 module.exports = router;
@@ -21,15 +20,15 @@ module.exports = router;
  */
 router.post('/client/validate.md', async (ctx) => {
     let redirect_uri = ctx.request.body.redirect_uri;
-    if (!stringUtil.isUrl(redirect_uri)) {
-        throw new ParamError(1000, 'redirect_uri不合法')
+    if (!mdUtil.formatUtil.isUrl(redirect_uri)) {
+        throw new ParamError(1000, 'redirect_uri not a url')
     }
     let client_id = ctx.request.body.client_id;
-    if (stringUtil.isEmpty(client_id)) {
+    if (mdUtil.stringUtil.isEmpty(client_id)) {
         throw new ParamError(1000, 'client_id不可为空');
     }
     let scope = ctx.request.body.scope;
-    if (stringUtil.isEmpty(scope)) {
+    if (mdUtil.stringUtil.isEmpty(scope)) {
         throw new ParamError(1000, 'scope 不能为空');
     }
     //----------------------------------------
@@ -51,24 +50,24 @@ router.post('/client/validate.md', async (ctx) => {
  */
 router.post('/authorize.md', async (ctx) => {
     let redirect_uri = ctx.request.body.redirect_uri;
-    if (!stringUtil.isUrl(redirect_uri)) {
+    if (!mdUtil.formatUtil.isUrl(redirect_uri)) {
         throw new ParamError(1000, 'redirect_uri不合法');
     }
     let client_id = ctx.request.body.client_id;
-    if (stringUtil.isEmpty(client_id)) {
+    if (mdUtil.stringUtil.isEmpty(client_id)) {
         throw new ParamError(1000, 'client_id不可为空');
     }
     let scope = ctx.request.body.scope;
-    if (stringUtil.isEmpty(scope)) {
+    if (mdUtil.stringUtil.isEmpty(scope)) {
         throw new ParamError(1000, 'scope 不能为空');
     }
     let state = ctx.request.body.state || -1;
     let username = ctx.request.body.username;
-    if (stringUtil.isEmpty(username)) {
+    if (mdUtil.stringUtil.isEmpty(username)) {
         throw new ParamError(1056, '用户名不可为空')
     }
     let password = ctx.request.body.password;
-    if (stringUtil.isEmpty(password)) {
+    if (mdUtil.stringUtil.isEmpty(password)) {
         throw new ParamError(1057, '密码不可为空')
     }
     //----------------------------------------

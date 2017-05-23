@@ -6,7 +6,7 @@ module.exports.appInfo = {
 };
 
 module.exports.mongoose = {
-    url: 'mongodb://moondust.cn/auth',
+    url: 'mongodb://localhost/auth',
     options: {
         // db: {native_parser: true},
         // server: {poolSize: 5},
@@ -18,7 +18,7 @@ module.exports.mongoose = {
 
 
 module.exports.redis = {
-    host: 'moondust.cn',
+    host: 'localhost',
     port: 6379,
     options: {}
 }

@@ -3,7 +3,7 @@
  */
 const userModel = require('../model/user.module');
 const util = require('util');
-const commonUtil = require('../utils/index');
+const mdUtil = require('moondust-util');
 const clientModel = require('../model/client.module');
 const BusinessError = require('moondust-error').BusinessError;
 const authCode_repository = require('../repository/authcode_repository');
@@ -26,10 +26,10 @@ async function build_authenticate_code(client_id, redirect_uri, scope, username,
     if (client.redirect_uri !== redirect_uri) {
         throw new BusinessError(1002, '重定向地址不正确')
     }
-    if (!await commonUtil.ArrayInclude('authenticate_code', client.auth_type)) {
+    if (!await mdUtil.arrayUtil.include('authenticate_code', client.auth_type)) {
         throw new BusinessError(1008, '不支持authenticate_code验证方式');
     }
-    let scopeInclude = await commonUtil.include(client.scope, scope, ',');
+    let scopeInclude = await mdUtil.stringUtil.include(client.scope, scope, ',');
     if (!scopeInclude) {
         throw new BusinessError(1003, 'scope权限无法匹配');
     }

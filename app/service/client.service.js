@@ -5,7 +5,7 @@
 const codeUtils = require('../utils').codeUtil
 const Errors = require('moondust-error');
 const clientModel = require('../model/client.module');
-const commonUtil = require('../utils');
+const mdUtils = require("moondust-util");
 
 /**
  * 注册客户端（临时方法）
@@ -26,8 +26,6 @@ async function register(client_name, redirect_uri) {
     };
     return await clientModel.insertClient(data);
 }
-
-
 /**
  * 验证客户端的合法性
  * @param client_id
@@ -43,13 +41,12 @@ async function validate(client_id, redirect_uri, scope) {
     if (client.redirect_uri !== redirect_uri) {
         throw new Errors.BusinessError(1002, '重定向地址错误');
     }
-    let scopeAllInclude = await commonUtil.include(client.scope, scope, ',');
+    let scopeAllInclude = await mdUtils.stringUtil.include(client.scope, scope, ',');
     if (!scopeAllInclude) {
         throw new Errors.BusinessError(1003, '无法匹配对应的scope权限');
     }
     return client;
 }
-
 module.exports = {
     register: register,
     validate: validate
