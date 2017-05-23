@@ -81,7 +81,7 @@ async function fresh_token(client_id, client_secret, fresh_token) {
     if (client.client_secret !== client_secret) {
         throw new BusinessError(1056, 'client_secret错误');
     }
-    if (!await commonUtil.ArrayInclude('fresh_token', client.auth_type)) {
+    if (!await mdUtil.arrayUtil.include('fresh_token', client.auth_type)) {
         throw new BusinessError(1008, '不支持该授权方式')
     }
     let token = await token_repository.build_token_byfresh(fresh_token, 3600);
@@ -102,10 +102,10 @@ async function build_token_by_password(client_id, client_secret, scope, username
     let client = await clientModel.findByClientId(client_id);
     if (client === null) throw new BusinessError(1056, '找不到该客户端');
     if (client.client_secret !== client_secret)throw new BusinessError(1056, 'client_secret错误');
-    if (!await commonUtil.ArrayInclude('password', client.auth_type)) {
+    if (!await mdUtil.arrayUtil.include('password', client.auth_type)) {
         throw new BusinessError(1008, '不支持该授权方式')
     }
-    let scopeContainer = await commonUtil.include(client.scope, scope, ',');
+    let scopeContainer = await mdUtil.stringUtil.include(client.scope, scope, ',');
     if (!scopeContainer)throw new BusinessError(1057, "scope权限不匹配");
     let token = await token_repository.build_token_bypassword(user._id, client.client_id, scope, 3600);
     if (token === null) {
@@ -132,7 +132,7 @@ let authorization = (scopes) => {
             throw new BusinessError(500, 'access_token is timeout or useless');
         }
         if (i.scope !== 'all') {
-            let allInclude = await commonUtil.include(scopes, i.scope, ',');
+            let allInclude = await mdUtil.stringUtil.include(scopes, i.scope, ',');
             if (!allInclude) {
                 throw new BusinessError(500, `${i.scope} can not match ${scopes}`);
             }

@@ -2,7 +2,7 @@
  * Created by Tristan on 17/3/19.
  */
 const Router = require('koa-router')
-const userService = require('../service/user.service')
+const userService = require('../service/user.service');
 const route = new Router().prefix('api/user');
 const authorization = require('../service/oauth.service').authorization;
 
