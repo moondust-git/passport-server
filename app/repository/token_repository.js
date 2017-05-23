@@ -91,7 +91,6 @@ async function build_token_byfresh(fresh_token, time) {
     return await this.build_token_bycode(fresh_data.user_id, fresh_data.client_id, fresh_data.scope, time);
 }
 
-
 async function find_by_access_token(access_token) {
     return await new Promise((resolve) => {
         redis.get('access_token:' + access_token, (err, data) => {
